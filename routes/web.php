@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +19,16 @@ Route::get('/', function () {
 });
 
 Route::get('/charts', function () {
-    return view('charts');
+    $thisYearOrders = Order::query()
+        ->whereYear('created_at', date('Y'))
+        ->groupByMonth();
+
+    $lastYearOrders = Order::query()
+        ->whereYear('created_at', date('Y') - 1)
+        ->groupByMonth();
+
+    return view('charts', [
+        'thisYearOrders' => $thisYearOrders,
+        'lastYearOrders' => $lastYearOrders,
+    ]);
 });
