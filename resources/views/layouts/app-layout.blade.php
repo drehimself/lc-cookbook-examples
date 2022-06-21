@@ -8,7 +8,10 @@
 
     <title>{{ config('app.name', 'Laravel Cookbook') }}</title>
 
+    <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+
     <!-- Styles -->
+    @livewireStyles
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -29,6 +32,7 @@
     </div>
 
     <!-- Scripts -->
+    @livewireScripts
     @stack('scripts')
 </body>
 
