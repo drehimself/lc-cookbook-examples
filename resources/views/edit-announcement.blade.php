@@ -4,10 +4,20 @@
             {{ session('success_message') }}
         </div>
     @endif
+
+    @if (count($errors) > 0)
+        <div class="bg-red-200 text-red-700 px-4 py-2">
+            <ul class="list-disc ml-4">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="bg-white rounded-md border my-8 px-6 py-6">
         <div>
             <h2 class="text-2xl font-semibold">Edit Announcement</h2>
-            <form action="/announcement/update" method="POST" class="max-w-2xl mt-4" id="updateAnnouncement">
+            <form action="/announcement/update" method="POST" class="max-w-2xl mt-4" id="updateAnnouncement" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')
                 <div>
@@ -66,6 +76,17 @@
                     <label for="buttonLink" class="font-semibold block">Button Link</label>
                     <input type="url" name="buttonLink" id="buttonLink" class="border border-gray-400 rounded w-full px-2 py-2 mt-2" value="{{ $announcement->buttonLink }}" required>
                 </div>
+
+                <div class="mt-4">
+                    <label for="imageUpload" class="font-semibold block">Image Upload</label>
+                    <input type="file" name="imageUpload" class="mt-2" accept="image/*">
+                </div>
+
+                @if ($announcement->imageUpload)
+                    <div class="mt-4">
+                        <img src="{{ asset($announcement->imageUpload) }}" alt="image" class="max-w-xs">
+                    </div>
+                @endif
 
                 <div class="mt-8">
                     <button type="submit" class="bg-blue-600 rounded inline-block text-white px-4 py-4">Update Announcement</button>

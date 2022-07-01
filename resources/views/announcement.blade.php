@@ -5,7 +5,11 @@
         </div>
         <div class="text-gray-600 px-5 py-5">
 
-            <div class="content">{!! $announcement->content !!}</div>
+            @if ($announcement->imageUpload)
+                <img src="{{ asset($announcement->imageUpload) }}" alt="image" class="mx-auto">
+            @endif
+
+            <div class="content mt-4">{!! $announcement->content !!}</div>
 
             <p class="mt-6 mx-auto">
                 <a href="{{ $announcement->buttonLink }}" class="bg-purple-800 text-white inline-block rounded-xl font-semibold px-8 py-4" style="background: {{ $announcement->buttonColor }}">{{ $announcement->buttonText }}</a>
