@@ -11,7 +11,7 @@
     <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
 
     <!-- Styles -->
-    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    @stack('styles')
     @livewireStyles
     <script src="https://cdn.tailwindcss.com"></script>
 

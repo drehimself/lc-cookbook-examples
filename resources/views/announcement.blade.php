@@ -9,6 +9,10 @@
                 <img src="{{ asset($announcement->imageUpload) }}" alt="image" class="mx-auto">
             @endif
 
+            @if ($announcement->imageUploadFilePond)
+                <img src="{{ asset($announcement->imageUploadFilePond) }}" alt="image" class="mx-auto">
+            @endif
+
             <div class="content mt-4">{!! $announcement->content !!}</div>
 
             <p class="mt-6 mx-auto">
