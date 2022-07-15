@@ -48,6 +48,8 @@
                 <a href="/charts" class="hover:text-gray-200">Charts</a>
                 <a href="/stats" class="hover:text-gray-200">Stats</a>
                 <a href="/announcement/edit" class="hover:text-gray-200">Edit Announcement</a>
+                <a href="/posts" class="hover:text-gray-200">Posts</a>
+                <a href="/posts/create" class="hover:text-gray-200">Create Post</a>
             </nav>
         </div>
 
