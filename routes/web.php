@@ -4,6 +4,7 @@ use App\Http\Requests\PostFormRequest;
 use App\Models\Announcement;
 use App\Models\Order;
 use App\Models\Post;
+use App\Models\Song;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -144,6 +145,10 @@ Route::patch('/posts/{post}', function (Post $post, PostFormRequest $request) {
     $request->updateOrCreate($post);
 
     return redirect('/posts/'.$post->id)->with('success_message', 'Post was updated!');
+});
+
+Route::get('/drag-drop', function () {
+    return view('drag-drop');
 });
 
 function fields(Request $request)
