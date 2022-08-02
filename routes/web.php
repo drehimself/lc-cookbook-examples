@@ -6,7 +6,9 @@ use App\Models\Order;
 use App\Models\Post;
 use App\Models\Song;
 use App\Models\User;
+use Illuminate\Http\Client\Pool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -149,6 +151,28 @@ Route::patch('/posts/{post}', function (Post $post, PostFormRequest $request) {
 
 Route::get('/drag-drop', function () {
     return view('drag-drop');
+});
+
+Route::get('/http-client', function () {
+    // $responseGithub = Http::get('https://api.github.com/users/drehimself/repos?sort=created&per_page=10');
+
+    // $responseWeather = Http::get('https://api.openweathermap.org/data/2.5/weather?q=Toronto&units=metric&appid='.config('services.openWeatherMap.appId'));
+
+    // $responseMovies = Http::withToken(config('services.tmdb.bearerToken'))->get('https://api.themoviedb.org/3/movie/popular');
+
+    // $responseMovies = Http::movies()->get('/movie/popular');
+
+    $responses = Http::pool(fn (Pool $pool) => [
+        $pool->as('github')->get('https://api.github.com/users/drehimself/repos?sort=created&per_page=10'),
+        $pool->as('weather')->get('https://api.openweathermap.org/data/2.5/weather?q=Toronto&units=metric&appid='.config('services.openWeatherMap.appId')),
+        $pool->as('movies')->withToken(config('services.tmdb.bearerToken'))->get('https://api.themoviedb.org/3/movie/popular'),
+    ]);
+
+    return view('http-client', [
+        'repos' => $responses['github']->json(),
+        'weather' => $responses['weather']->json(),
+        'movies' => $responses['movies']->json(),
+    ]);
 });
 
 function fields(Request $request)

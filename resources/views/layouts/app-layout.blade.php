@@ -51,6 +51,7 @@
                 <a href="/posts" class="hover:text-gray-200">Posts</a>
                 <a href="/posts/create" class="hover:text-gray-200">Create Post</a>
                 <a href="/drag-drop" class="hover:text-gray-200">Drag and Drop</a>
+                <a href="/http-client" class="hover:text-gray-200">HTTP Client</a>
             </nav>
         </div>
 

@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Announcement;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +33,13 @@ class AppServiceProvider extends ServiceProvider
                 'bannerColor' => $announcement->bannerColor,
                 'isActive' => $announcement->isActive,
             ]);
+        });
+
+        Http::macro('movies', function () {
+            return Http::withHeaders([
+                'X-Example' => 'example',
+            ])->withToken(config('services.tmdb.bearerToken'))
+            ->baseUrl('https://api.themoviedb.org/3');
         });
     }
 }
